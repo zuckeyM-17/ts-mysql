@@ -9,31 +9,39 @@ const con: Connection = createConnection({
   database: "sandbox"
 });
 
-const sql = "INSERT INTO users SET ?;";
+interface User {
+  id?: number;
+  name: string;
+}
 
-const createUser = (name: string): Promise<any> => {
+// const insertSql = "INSERT INTO users SET ?;";
+// const createUser = (name: string): Promise<string | Error> => {
+//   return new Promise((resolve, reject) => {
+//     con.query(insertSql, { name: name }, (err: MysqlError | null, results: any) => {
+//       if (err) { reject(err); return; }
+//       resolve("success!");
+//     });
+//   });
+// };
+
+const selectSql = "SELECT * FROM users;";
+const getUsers = (): Promise<User[] | Error> => {
   return new Promise((resolve, reject) => {
-    con.query(sql, { name: name }, (err: MysqlError | null, results: any) => {
-      if (err) {
-        reject(err);
-        return;
-      }
+    con.query(selectSql, (err: MysqlError | null, results: any) => {
+      if (err) { reject(err); return; }
       resolve(results);
     });
   });
-};
+}
 
 new Promise((resolve, reject) => {
   con.beginTransaction((err: MysqlError) => {
-    if (err) {
-      reject(err);
-      return;
-    }
-    resolve(createUser("zuckey"));
+    if (err) { reject(err); return; }
+    resolve(getUsers());
   });
 })
-  .then(result => {
-    console.log(result);
+  .then((result: any) => {
+    result.forEach((user: any) => console.log(user.name));
     process.exit(0);
   })
   .catch((err: Error) => {
