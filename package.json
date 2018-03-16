@@ -15,5 +15,11 @@
   "bugs": {
     "url": "https://github.com/zuckeyM-17/ts-mysql/issues"
   },
-  "homepage": "https://github.com/zuckeyM-17/ts-mysql#readme"
+  "homepage": "https://github.com/zuckeyM-17/ts-mysql#readme",
+  "dependencies": {
+    "@types/mysql": "^2.15.3",
+    "mysql": "^2.15.0",
+    "ts-node": "^5.0.1",
+    "typescript": "^2.7.2"
+  }
 }
