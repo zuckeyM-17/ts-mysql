@@ -28,15 +28,21 @@ const selectSql = "SELECT * FROM users;";
 const getUsers = (): Promise<User[] | Error> => {
   return new Promise((resolve, reject) => {
     con.query(selectSql, (err: MysqlError | null, results: any) => {
-      if (err) { reject(err); return; }
+      if (err) {
+        reject(err);
+        return;
+      }
       resolve(results);
     });
   });
-}
+};
 
 new Promise((resolve, reject) => {
   con.beginTransaction((err: MysqlError) => {
-    if (err) { reject(err); return; }
+    if (err) {
+      reject(err);
+      return;
+    }
     resolve(getUsers());
   });
 })
