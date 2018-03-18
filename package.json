@@ -20,7 +20,9 @@
   "dependencies": {
     "@types/mysql": "^2.15.3",
     "mysql": "^2.15.0",
+    "reflect-metadata": "^0.1.12",
     "ts-node": "^5.0.1",
+    "typeorm": "^0.1.16",
     "typescript": "^2.7.2"
   },
   "devDependencies": {

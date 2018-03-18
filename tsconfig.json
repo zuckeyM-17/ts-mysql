@@ -8,6 +8,8 @@
     "moduleResolution": "node",
     "target": "es5",
     "downlevelIteration": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
     "lib": [
       "dom",
       "es6",
