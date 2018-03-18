@@ -1,7 +1,6 @@
-const { createConnection } = require("mysql");
-import { Connection, MysqlError, FieldInfo } from "mysql";
+import * as mysql from 'mysql';
 
-const con: Connection = createConnection({
+const con: mysql.Connection = mysql.createConnection({
   host: "localhost",
   port: 13306,
   user: "root",
@@ -27,7 +26,7 @@ interface User {
 const selectSql = "SELECT * FROM users;";
 const getUsers = (): Promise<User[] | Error> => {
   return new Promise((resolve, reject) => {
-    con.query(selectSql, (err: MysqlError | null, results: any) => {
+    con.query(selectSql, (err: mysql.MysqlError | null, results: any) => {
       if (err) {
         reject(err);
         return;
@@ -38,7 +37,7 @@ const getUsers = (): Promise<User[] | Error> => {
 };
 
 new Promise((resolve, reject) => {
-  con.beginTransaction((err: MysqlError) => {
+  con.beginTransaction((err: mysql.MysqlError) => {
     if (err) {
       reject(err);
       return;
